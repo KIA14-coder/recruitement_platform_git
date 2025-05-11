@@ -156,7 +156,7 @@
     <p><strong>CV :</strong> <a href="uploads/cv_alice.pdf" target="_blank">📎 Télécharger</a></p>
     <p><strong>Lettre de motivation :</strong> <a href="uploads/lettre_alice.pdf" target="_blank">📎 Télécharger</a></p>
 
-    <a href="modifier_profil.php" class="btn">Modifier</a>
+    <a href="{{ route('modifier.profil') }}" class="btn">Modifier</a>
   </div>
 </div>
 

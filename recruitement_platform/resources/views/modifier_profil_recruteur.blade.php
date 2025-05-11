@@ -135,7 +135,7 @@
 
 <div class="container">
   <h2>✏️ Modifier Profil</h2>
-  <form action="enregistrer_profil_recruteur.php" method="post">
+  <form action="{{ route('dashboard.recruteur.profil') }}" method="post">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" value="Jean Dupuis" required>
 
@@ -150,6 +150,15 @@
 
     <button type="submit" class="btn">Enregistrer</button>
   </form>
+
+  <div class="footer-menu">
+    <a href="{{ route('dashboard.recruteur') }}">Accueil</a>
+    <a href="{{ route('dashboard.recruteur.entretiens') }}">Date d’entretiens</a>
+    <a href="{{ route('dashboard.recruteur.suivi_candidats') }}">Suivis des candidats</a>
+    <a href="{{ route('add.offres') }}">Ajouter un emploi</a>
+    <a href="{{ route('dashboard.recruteur.profil') }}">Profil</a>
+   
+  </div>
 </div>
 
 

@@ -145,7 +145,7 @@
 <div class="container">
   <h2>✏️ Modifier Mon Profil</h2>
 
-  <form action="enregistrer_modifications.php" method="post" enctype="multipart/form-data" class="card">
+  <form action="{{ route('dashboard.candidat.profil') }}" method="post" enctype="multipart/form-data" class="card">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" value="Alice Ngono" required>
 
@@ -172,6 +172,18 @@
 
     <button type="submit" class="btn">Enregistrer</button>
   </form>
+
+  <div class="footer-menu">
+  <a href="{{ route('dashboard.candidat') }}">Offres</a>
+  <a href="{{ route('dashboard.candidat.offres_sauvegardees') }}">Sauvegardé</a>
+  <a href="{{ route('dashboard.candidat.profil') }}">Profil</a>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+  </form>
+  <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color:red">
+  Déconnexion
+  </a>
+</div>
 </div>
 
 <script>

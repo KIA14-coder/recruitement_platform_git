@@ -152,7 +152,7 @@
         <div class="info"><strong>Entreprise :</strong> TechCorp</div>
         <div class="info"><strong>Email :</strong> jean@techcorp.com</div>
         <div class="info"><strong>Type de compte :</strong> Recruteur</div>
-        <a href="modifier_profil_recruteur.php" class="btn">Modifier</a>
+        <a href="{{ route('modifier.profil.recruteur') }}" class="btn">Modifier</a>
       </div>
       
       <div class="footer-menu">

@@ -153,6 +153,16 @@
     Route::post('/candidat/save-job', [JobController::class, 'saveJob'])->name('candidat.jobs.save');
 
 
+    Route::get('/modifier-profil', function () {
+        return view('modifier_profil');
+    })->name('modifier.profil');
+
+    // Route pour le profil recruteur
+    Route::get('/modifier-profil-recruteur', function () {
+        return view('modifier_profil_recruteur');
+    })->name('modifier.profil.recruteur');
+
+
     // Route::get('/postuler/{offre}', [CandidatureController::class, 'create'])->name('candidature.create');
     // Route::post('/postuler', [CandidatureController::class, 'store'])->name('candidature.envoyer');
 
