@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('job_id')->constrained('job_createds')->onDelete('cascade');
             $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade');
             $table->enum('statut', ['en attente', 'rejeté', 'entretien', 'offre envoyée','accepté'])->default('en attente');
+            $table->string('cv_path')->nullable(); // Ajout du chemin du CV
+            $table->string('lm_path')->nullable(); // Ajout du chemin de la Lettre de Motivation
+            $table->text('message')->nullable(); // Ajout du champ pour le message
             $table->timestamps();
         });
     }

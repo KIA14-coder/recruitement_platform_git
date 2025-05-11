@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JobCreated;
+use App\Models\JobSaved;
+use App\Models\Candidat;
 use App\Models\User;
 use App\Models\Employeur;
 
@@ -15,6 +17,12 @@ class JobController extends Controller
         $offres = JobCreated::where('employeur_id', $employeurId)->latest()->get();
 
         return view('offre_recruteur', compact('offres'));
+    }
+
+    public function allJobs()
+    {
+        $offres = JobCreated::where('statut', 'ouvert')->latest()->get();
+        return response()->json($offres);
     }
 
     // 🔸 Créer une offre
@@ -106,5 +114,33 @@ class JobController extends Controller
         $job->delete();
 
         return redirect()->route('dashboard.recruteur')->with('success', 'Offre supprimée.');
+    }
+
+
+
+    public function saveJob(Request $request)
+    {
+        $candidatId = session('candidat_id'); // 👈 assure-toi que ce champ existe bien dans la session
+
+        if (!$candidatId) {
+            return response()->json(['error' => 'Non connecté'], 401);
+        }
+
+        $jobId = $request->input('job_id');
+
+        $exists = JobSaved::where('candidat_id', $candidatId)
+                        ->where('job_id', $jobId)
+                        ->exists();
+
+        if ($exists) {
+            return response()->json(['message' => 'Déjà sauvegardée']);
+        }
+
+        JobSaved::create([
+            'candidat_id' => $candidatId,
+            'job_id' => $jobId,
+        ]);
+
+        return response()->json(['message' => 'Offre sauvegardée']);
     }
 }

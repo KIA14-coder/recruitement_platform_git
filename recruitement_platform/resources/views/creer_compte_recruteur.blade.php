@@ -131,7 +131,7 @@
   <div class="container">
     <h2 class="logo"><span>J</span>obSmart</h2>
 
-    <form id="recruiterForm" onsubmit="event.preventDefault(); firebaseSignupRecruteur();">
+    <form action="{{ route('register.recruteur') }}" method="POST">
 
     @csrf
       <h2>Inscription Recruteur</h2>
@@ -166,7 +166,7 @@
     </form>
   </div>
 
-  <script>
+  <!-- <script>
     const form = document.getElementById('recruiterForm');
     const errorMessage = document.getElementById('error-message');
 
@@ -200,7 +200,7 @@
         alert("Erreur Firebase : " + error.message);
       });
   }
-  </script>
+  </script> -->
   
 </body>
 </html>

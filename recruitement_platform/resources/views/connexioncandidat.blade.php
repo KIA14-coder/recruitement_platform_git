@@ -101,8 +101,8 @@
 
 
     <h1>Connexion Candidat</h1>
-    <form id="loginForm">
-    @csrf
+    <form  id="loginForm">
+    
       <input type="email" id="email" placeholder="Adresse email" required>
       <input type="password" id="password" placeholder="Mot de passe" required>
       <button type="submit">Se connecter</button>
@@ -146,7 +146,7 @@
       });
 
       const result = await response.text();
-      if (response.redirected) {
+      if (response.ok &&response.redirected) {
         window.location.href = response.url;
       } else {
         alert(result);

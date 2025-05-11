@@ -173,10 +173,11 @@
 <div class="container">
   <h2>Offres suggérées</h2>
   <div id="offre-card" class="card"></div>
-  <div class="btn-group">
-    <button class="btn" onclick="sauvegarder()">Sauvegarder</button>
-    <button class="btn" onclick="postuler()">Postuler</button>
-  </div>
+<div class="btn-group">
+  <button class="btn" onclick="sauvegarder()">Sauvegarder</button>
+  <button class="btn" onclick="postuler()">Postuler</button>
+  <button class="btn" onclick="pasInteresse()" style="background-color: gray;">Pas intéressé</button>
+</div>
   <div class="counter" id="compteur"></div>
 </div>
 
@@ -200,13 +201,14 @@
     if (index < offres.length) {
       const o = offres[index];
       document.getElementById("offre-card").innerHTML = `
-        <img src="${o.logo}" alt="logo entreprise"><br>
-        <p><strong>Poste:</strong> ${o.poste}</p>
+        <p><strong>Poste:</strong> ${o.titre}</p>
         <p><strong>Entreprise:</strong> ${o.entreprise}</p>
         <p><strong>Lieu:</strong> ${o.lieu}</p>
-        <p><strong>Compétences:</strong> ${o.competences}</p>
-        <p><strong>Type:</strong> ${o.type}</p>
-        <p><strong>Mission:</strong> ${o.mission}</p>
+        <p><strong>Salaire:</strong> ${o.salaire ?? 'Non précisé'}</p>
+        <p><strong>Contrat:</strong> ${o.type_contrat}</p>
+        <p><strong>Horaires:</strong> ${o.Horaires}</p>
+        <p><strong>Télétravail:</strong> ${o.teletravail}</p>
+        <p><strong>Description:</strong> ${o.description}</p>
       `;
       document.getElementById("compteur").innerText = "Offre " + (index + 1) + " sur " + offres.length;
     } else {
@@ -232,13 +234,19 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    fetch("get_offres.php")
-      .then(res => res.json())
-      .then(data => {
-        offres = data;
-        afficherOffre();
-      });
+    fetch("/candidat/get-all-jobs")
+    .then(res => res.json())
+    .then(data => {
+      offres = data;
+      afficherOffre();
   });
+
+  });
+
+  function pasInteresse() {
+  index++;
+  afficherOffre();
+  }
 
   // Cacher le menu si on clique ailleurs
   document.addEventListener("click", function (e) {

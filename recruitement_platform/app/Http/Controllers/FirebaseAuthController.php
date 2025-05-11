@@ -15,20 +15,24 @@ class FirebaseAuthController extends Controller
 {
     protected $firebaseAuth;
     protected $database;
+    protected $factory;
 
-    public function __construct(FirebaseAuth $firebaseAuth)
-    {
+    public
+    function __construct(){
         $factory = (new Factory)
-            ->withServiceAccount(config('storage/firebase/firebase.json'))
-            ->withDatabaseUri(config('https://auth-53db4-default-rtdb.firebaseio.com/'));
+            ->withServiceAccount(base_path('storage/firebase/firebase.json'))
+            ->withDatabaseUri('https://auth-53db4-default-rtdb.firebaseio.com/');
 
         $this->firebaseAuth = $factory->createAuth();
         $this->database = $factory->createDatabase();
-
     }
+
+    
 
     public function registerCandidat(Request $request)
     {
+        
+
         $request->validate([
             'first_name' => 'required',
             'last_name'  => 'required',
@@ -95,6 +99,8 @@ class FirebaseAuthController extends Controller
 
     public function registerRecruteur(Request $request)
     {
+        
+
         $request->validate([
             'first_name' => 'required',
             'last_name'  => 'required',
@@ -157,10 +163,11 @@ class FirebaseAuthController extends Controller
 
     public function login(Request $request)
     {
+        
         $request->validate([
             'id_token' => 'required|string',
         ]);
-
+        
         try {
             // 🔐 Vérifier le token Firebase
             $verifiedIdToken = $this->firebaseAuth->verifyIdToken($request->input('id_token'));
@@ -173,6 +180,7 @@ class FirebaseAuthController extends Controller
                 return back()->with('error', 'Aucun utilisateur lié à ce compte Firebase.');
             }
 
+            
             // 🏷 Détection du rôle (employeur ou candidat)
             $role = $user->role;
 
